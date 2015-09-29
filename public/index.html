@@ -1,0 +1,26 @@
+<!doctype html>
+
+<meta charset=utf-8>
+<title>Peertransfer</title>
+<meta name=viewport content='width=device-width, initial-scale=1'>
+<link rel=stylesheet href=style.css>
+
+<!-- UI based on:
+  http://tutorialzine.com/2013/11/javascript-file-encrypter/ -->
+
+<div id=stage>
+		<div class=content style=margin-top:-130px>
+		  
+		  <input type=url id=url onClick=this.select()>
+		  
+		  <a class="button green browse" style=cursor:pointer;width:446px;height:62px;line-height:62px;margin-bottom:13px;text-align onClick=document.getElementById('send').click()>send a file</a>
+		  
+			<a class='button download red' id=downloadLink style=cursor:pointer;width:446px;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;>Hallo.zip - 3MB</a>
+			
+			<small>Send files <b>peer-to-peer</b> and <b>end-to-end</b> encrypted.</small><br>
+			<small>Host it yourself! <a href=https://github.com/pguth/peertransfer class=github>Github</a> has the source.</small>
+		</div>
+</div>
+<input type=file id=send />
+
+<script src=bundle.js></script>
