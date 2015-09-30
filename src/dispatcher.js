@@ -1,7 +1,7 @@
 var inherits = require( 'inherits')
 var EventEmitter = require( 'events').EventEmitter
-var FileReadStream = require( 'namedfilestream/read')
-var FileWriteStream = require( 'namedfilestream/write')
+var FileReadStream = require( 'filestream/read')
+var FileWriteStream = require( 'filestream/write')
 
 
 inherits( Dispatcher, EventEmitter)

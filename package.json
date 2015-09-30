@@ -22,13 +22,13 @@
     "inherits": "~2.0.1",
     "events": "~1.1.0",
     "debug": "~2.2.0",
-    "namedfilestream": "~1.0.2",
     "webrtc-swarm": "~2.0.0",
     "cuid": "~1.3.8",
     "signalhub": "~4.3.1",
     "babelify": "~6.3.0",
     "browserify-hmr": "~0.3.0",
-    "watchify": "~3.4.0"
+    "watchify": "~3.4.0",
+    "filestream": "~4.0.0"
   },
   "dependencies": {
     "ecstatic": "~1.0.1"
