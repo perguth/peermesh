@@ -1,7 +1,8 @@
 var inherits = require( 'inherits')
 var EventEmitter = require( 'events').EventEmitter
-var FileReadStream = require( 'filestream/read')
-var FileWriteStream = require( 'filestream/write')
+var FileReadStream = require( 'namedfilestream/read')
+var FileWriteStream = require( 'namedfilestream/write')
+var detect = require('feature/detect')
 
 
 inherits( Dispatcher, EventEmitter)
@@ -35,8 +36,15 @@ function Dispatcher (opts){
   this.on( 'peer', peer =>{
     console.log( 'new peer connected')
     let receive = new FileWriteStream()
-    peer.pipe( receive)
-    receive.on( 'file', x => console.log( 'file received', x)) })
+    peer.pipe( receive).on( 'file', file =>{
+      console.log( 'file received', file)
+      var downloadbtn = document.getElementById( 'downloadLink')
+      var fileLink = detect( 'URL').createObjectURL( file)
+      downloadbtn.innerHTML = file.name
+      downloadbtn.style[ 'cursor'] = 'pointer'
+      downloadbtn.style[ 'opacity'] = '1'
+      downloadbtn.href = fileLink
+    }) })
 
   this.on( 'fileAdded', input =>{
     let mesh = require( './mesh')()
