@@ -90,22 +90,22 @@ body{
 	display:none;
 }
 
-a.back{
-	width:32px;
-	height:32px;
-	background:url(vendor/icons.svg) no-repeat -192px 0;
-	position:absolute;
-	cursor:pointer;
-	top:50px;
-	left:50%;
-	z-index:10;
-	opacity:0.8;
-	margin-left:-16px;
-	display:none;
+a#newMesh{
+  position: absolute;
+  top: 125px;
+  left: 50%;
+	width: 32px;
+	height: 32px;
+	color: white;
+	cursor: pointer;
+	z-index: 10;
+	opacity: 0.3;
+	margin: 15px 10px 0 -16px;
+	font-size: 48px;
 }
 
-a.back:hover{
-	opacity:1;
+a#newMesh:hover{
+	opacity:0.8;
 }
 
 input {

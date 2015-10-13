@@ -25,8 +25,9 @@
     "cuid": "~1.3.8",
     "signalhub": "~4.3.1",
     "babelify": "~6.3.0",
-    "filestream": "~4.0.0",
     "wzrd": "~1.3.1",
-    "browserify": "~11.2.0"
+    "browserify": "~11.2.0",
+    "feature": "~1.0.0",
+    "namedfilestream": "~1.0.2"
   }
 }

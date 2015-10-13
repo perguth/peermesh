@@ -8,19 +8,20 @@
 <!-- UI based on:
   http://tutorialzine.com/2013/11/javascript-file-encrypter/ -->
 
+<a id='newMesh' style=float:right alt='create new mesh'>⟳</a>
 <div id=stage>
-		<div class=content style=margin-top:-130px>
-		  
-		  <input type=url id=url onClick=this.select()>
-		  
-		  <a id=uploadLink class="button green browse" style=cursor:default;width:446px;height:62px;line-height:62px;margin-bottom:13px;opacity:.6 onClick=document.getElementById('send').click()>waiting for peers</a>
-		  
-			<a id=downloadLink class='button download red' style=cursor:default;width:446px;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;opacity:.3>waiting for files</a>
-			
-			<small>Send files directly <b>peer-to-peer</b> to multiple peers.</small><br>
-			<small>Host it yourself! <a href=https://github.com/pguth/peermesh class=github>Github</a> has the source.</small>
-		</div>
+	<div class=content style='width:446px;margin:0 auto;margin-top:-130px;'>
+    <input type=url id=url onClick=this.select()>
+
+	  <a id=uploadLink class="button green browse" style=cursor:default;width:100%;height:62px;line-height:62px;margin-bottom:13px;opacity:.8 onClick=document.getElementById('send').click()>waiting for peers</a>
+
+		<a id=downloadLink class='button download red' style=cursor:default;width:100%;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;opacity:.8>waiting for files</a>
+
+		<small>Send files <b>peer-to-peer</b> over a <b>mesh network</b> built with <b>WebRTC</b>.</small><br>
+		<small>Host it yourself! <a href=https://github.com/pguth/peermesh class=github>Github</a> has the source.</small>
+	</div>
 </div>
 <input type=file id=send />
 
 <script src=bundle.js></script>
+<img src="https://analytics.guth.so/fair-tracking.php?idsite=31&rec=1" style="border:0" alt="" />
