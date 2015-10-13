@@ -4,9 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "npm run hmr & npm run www",
-    "hmr": "watchify index.js -p browserify-hmr -o public/bundle.js -t babelify -dv",
-    "www": "ecstatic public -p 9966"
+    "start": "cd public && wzrd ../index.js:bundle.js -- -t babelify --debug",
+    "build": "browserify index.js -t babelify -o public/bundle.js"
   },
   "keywords": [
     "mesh",
@@ -26,11 +25,8 @@
     "cuid": "~1.3.8",
     "signalhub": "~4.3.1",
     "babelify": "~6.3.0",
-    "browserify-hmr": "~0.3.0",
-    "watchify": "~3.4.0",
-    "filestream": "~4.0.0"
-  },
-  "dependencies": {
-    "ecstatic": "~1.0.1"
+    "filestream": "~4.0.0",
+    "wzrd": "~1.3.1",
+    "browserify": "~11.2.0"
   }
 }

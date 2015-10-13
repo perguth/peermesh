@@ -13,12 +13,12 @@
 		  
 		  <input type=url id=url onClick=this.select()>
 		  
-		  <a class="button green browse" style=cursor:pointer;width:446px;height:62px;line-height:62px;margin-bottom:13px;text-align onClick=document.getElementById('send').click()>send a file</a>
+		  <a id=uploadLink class="button green browse" style=cursor:default;width:446px;height:62px;line-height:62px;margin-bottom:13px;opacity:.6 onClick=document.getElementById('send').click()>waiting for peers</a>
 		  
-			<a class='button download red' id=downloadLink style=cursor:default;width:446px;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;opacity:.1>waiting for files</a>
+			<a id=downloadLink class='button download red' style=cursor:default;width:446px;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;opacity:.3>waiting for files</a>
 			
-			<small>Send files <b>peer-to-peer</b> and <b>end-to-end</b> encrypted.</small><br>
-			<small>Host it yourself! <a href=https://github.com/pguth/peertransfer class=github>Github</a> has the source.</small>
+			<small>Send files directly <b>peer-to-peer</b> to multiple peers.</small><br>
+			<small>Host it yourself! <a href=https://github.com/pguth/peermesh class=github>Github</a> has the source.</small>
 		</div>
 </div>
 <input type=file id=send />
