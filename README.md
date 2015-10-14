@@ -11,7 +11,7 @@
 
 Files will not be propagated among peers. The peers that initates a transfer will send the file to all connected peers.
 
-[![peermesh](https://cdn.pbrd.co/images/1lPSAkRF.png)](https://pguth.github.io/peermesh/)
+[![peermesh](https://cdn.pbrd.co/images/1nDKNtbn.png)](https://pguth.github.io/peermesh/)
 
 ## Related
 
