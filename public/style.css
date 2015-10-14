@@ -91,16 +91,10 @@ body{
 }
 
 a#newMesh{
-  position: absolute;
-  top: 125px;
-  left: 50%;
-	width: 32px;
-	height: 32px;
 	color: white;
 	cursor: pointer;
 	z-index: 10;
 	opacity: 0.3;
-	margin: 15px 10px 0 -16px;
 	font-size: 48px;
 }
 

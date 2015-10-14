@@ -1,8 +1,8 @@
 {
   "name": "peermesh",
   "version": "0.0.0",
-  "description": "",
-  "main": "main.js",
+  "description": "Send files peer-to-peer over a mesh network built with WebRTC.",
+  "main": "index.js",
   "scripts": {
     "start": "cd public && wzrd ../index.js:bundle.js -- -t babelify --debug",
     "build": "browserify index.js -t babelify -o public/bundle.js"
@@ -16,18 +16,28 @@
     "group"
   ],
   "author": "Per Guth <mail@perguth.de> (http://perguth.de/)",
-  "license": "MIT",
-  "devDependencies": {
-    "inherits": "~2.0.1",
-    "events": "~1.1.0",
-    "debug": "~2.2.0",
-    "webrtc-swarm": "~2.0.0",
-    "cuid": "~1.3.8",
-    "signalhub": "~4.3.1",
+  "license": "AGPLv3",
+  "dependencies": {
     "babelify": "~6.3.0",
-    "wzrd": "~1.3.1",
     "browserify": "~11.2.0",
+    "crypto": "~0.0.3",
+    "cuid": "~1.3.8",
+    "debug": "~2.2.0",
+    "extend.js": "~0.0.2",
     "feature": "~1.0.0",
-    "namedfilestream": "~1.0.2"
+    "inherits": "~2.0.1",
+    "namedfilestream": "~1.0.2",
+    "signalhub": "~4.3.1",
+    "through": "~2.3.8",
+    "typedarray-to-buffer": "~3.0.4",
+    "webrtc-swarm": "~2.0.0",
+    "wzrd": "~1.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pguth/peermesh"
+  },
+  "bugs": {
+    "url": "https://github.com/pguth/peermesh/issues"
   }
 }

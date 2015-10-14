@@ -1,7 +1,7 @@
 var inherits = require( 'inherits')
 var EventEmitter = require( 'events').EventEmitter
 var FileReadStream = require( 'namedfilestream/read')
-var FileWriteStream = require( 'namedfilestream/write')
+var FileWriteStream = require( './mod-namedfilestream/write')
 var detect = require( 'feature/detect')
 
 
@@ -52,10 +52,12 @@ function Dispatcher (opts){
     if (peers <= 0){
       uploadbtn.style[ 'cursor'] = 'default'
       uploadbtn.style[ 'opacity'] = '.6'
+      uploadbtn.onclick = x=> null
       uploadbtn.text = 'reinitializing' }
     else {
       uploadbtn.style[ 'cursor'] = 'pointer'
       uploadbtn.style[ 'opacity'] = '1'
+      uploadbtn.onclick = x=> document.getElementById('send').click()
       uploadbtn.text = 'send a file to ' + peers + ' peer'
         + ((peers > 1)?'s':'') } })
 

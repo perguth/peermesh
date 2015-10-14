@@ -8,14 +8,16 @@
 <!-- UI based on:
   http://tutorialzine.com/2013/11/javascript-file-encrypter/ -->
 
-<a id='newMesh' style=float:right alt='create new mesh'>⟳</a>
 <div id=stage>
-	<div class=content style='width:446px;margin:0 auto;margin-top:-130px;'>
+	<div class=content style=width:446px;margin-left:auto;margin-right:auto;margin-top:-180px;>
+
+    <a id=newMesh style=width:100%;text-align:center; alt='create new mesh'>⟳</a>
+    
     <input type=url id=url onClick=this.select()>
 
-	  <a id=uploadLink class="button green browse" style=cursor:default;width:100%;height:62px;line-height:62px;margin-bottom:13px;opacity:.8 onClick=document.getElementById('send').click()>waiting for peers</a>
+	  <a id=uploadLink class='button green browse' style=cursor:default;width:100%;height:62px;line-height:62px;margin-bottom:13px;opacity:.8;>waiting for peers</a>
 
-		<a id=downloadLink class='button download red' style=cursor:default;width:100%;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;opacity:.8 target=_blank>waiting for files</a>
+		<a id=downloadLink class='button download red' style=cursor:default;width:100%;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;opacity:.8; target=_blank>waiting for files</a>
 
 		<small>Send files <b>peer-to-peer</b> over a <b>mesh network</b> built with <b>WebRTC</b>.</small><br>
 		<small>Host it yourself! <a href=https://github.com/pguth/peermesh class=github>Github</a> has the source.</small>
