@@ -17,3 +17,7 @@ Files will not be propagated among peers. The peers that initates a transfer wil
 
 - [`peertransfer`](https://github.com/pguth/peertransfer)
   Peertransfer is a (1:n) WebRTC based file transfer tool. Compared to `peermesh` it encodes a authentication code into the "sharing URL" that is passed around and will not initiate WebRTC signaling if the code is missing or wrong.
+
+## Credits
+
+- [Encrypt and decrypt content with Nodejs](http://lollyrock.com/articles/nodejs-encryption/)
