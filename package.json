@@ -20,7 +20,6 @@
   "dependencies": {
     "babelify": "~6.3.0",
     "browserify": "~11.2.0",
-    "crypto": "~0.0.3",
     "cuid": "~1.3.8",
     "debug": "~2.2.0",
     "extend.js": "~0.0.2",
@@ -31,7 +30,8 @@
     "through": "~2.3.8",
     "typedarray-to-buffer": "~3.0.4",
     "webrtc-swarm": "~2.0.0",
-    "wzrd": "~1.3.1"
+    "wzrd": "~1.3.1",
+    "crypto": "0.0.3"
   },
   "repository": {
     "type": "git",

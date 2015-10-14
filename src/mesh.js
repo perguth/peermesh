@@ -12,6 +12,7 @@ function Mesh (opts){
   if (! opts) opts = { namespace: null }
   if (! this.namespace) {
     this.namespace = opts.namespace || cuid.slug()
+    this.password = opts.password || cuid()
     this.wrtc = webrtcSwarm( signalhub( this.namespace, 
       ['http://localhost:7000']), {})
     ;['peer', 'connect', 'disconnect'].forEach( event =>{

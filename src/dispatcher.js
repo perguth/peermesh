@@ -3,6 +3,8 @@ var EventEmitter = require( 'events').EventEmitter
 var FileReadStream = require( 'namedfilestream/read')
 var FileWriteStream = require( './mod-namedfilestream/write')
 var detect = require( 'feature/detect')
+var crypto = require( 'crypto')
+var algorithm = 'aes-256-ctr'
 
 module.exports = Dispatcher
 
@@ -15,28 +17,30 @@ function Dispatcher (opts){
   var downloadbtn = document.getElementById( 'downloadLink')
   var mesh
 
-  this.on( 'noHash', x=> this.emit( 'initMesh') )
+  this.on( 'noHash', x=>{
+    this.emit( 'initMesh') })
 
   this.on( 'hash', hash =>{
-    this.emit( 'initMesh', hash)
+    let parts = hash.split(':', 2)
+    this.emit( 'initMesh', ...parts)
     urlElem.value = window.location.href.toString() })
 
-  this.on( 'initMesh', namespace =>{
-    let opts = {namespace} || null
+  this.on( 'initMesh', (namespace, password) =>{
+    let opts = {namespace, password} || null
     mesh = require( './mesh')( opts)
     console.log( 'mesh initialized:', mesh)
     ;['connect', 'disconnect'].forEach( event =>{
       mesh.on( event, peer => this.emit( event, peer)) })
-    this.emit( 'updateURL', mesh.namespace) })
+    this.emit( 'updateURL', mesh.namespace, mesh.password) })
 
   this.on( 'startNewMesh', x=>{
     window.location.href = urlElem.value.split( '#', 1)[ 0] })
 
-  this.on( 'updateURL', hash =>{
+  this.on( 'updateURL', (namespace, password) =>{
     let url = window.location.href.toString()
     if (url.indexOf( '#') === -1){
-      url += '#' + hash
-      window.location.hash = '#' + hash }
+      url += '#' + namespace + ':' + password
+      window.location.hash = '#' + namespace + ':' + password }
     setTimeout( x=> urlElem.value = url, 100) })
 
   this.on( 'disconnect', peer =>{
@@ -65,7 +69,8 @@ function Dispatcher (opts){
   this.on( 'acceptFiles', peer =>{
     let writeStream = new FileWriteStream()
     this.emit( 'endWriteStream', writeStream, peer)
-    peer.pipe( writeStream).on( 'file', file =>{
+    var decrypt = crypto.createDecipher(algorithm, mesh.password)
+    peer.pipe(  decrypt).pipe( writeStream).on( 'file', file =>{
       console.log( 'file received:', file)
       this.emit( 'attachFileURL', file) }) })
 
@@ -91,6 +96,7 @@ function Dispatcher (opts){
 
   this.on( 'sendFile', (file, peer) =>{
     console.log( 'sending file to peer:', peer)
-    file.pipe( peer, {end: false})
+    let encrypt = crypto.createCipher(algorithm, mesh.password)
+    file.pipe( encrypt).pipe( peer, {end: false})
     file.on( 'end', x=>
       console.log( 'sadly this also ends the peer stream :-(') ) }) }
