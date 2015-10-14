@@ -18,7 +18,6 @@ function Dispatcher (opts){
   var uploadbtn = document.getElementById( 'uploadLink')
   var downloadbtn = document.getElementById( 'downloadLink')
   var mesh
-  var peers = 0
 
   this.on( 'noHash', x=> this.emit( 'initMesh') )
 
@@ -42,7 +41,7 @@ function Dispatcher (opts){
     if (url.indexOf( '#') === -1){
       url += '#' + hash
       window.location.hash = '#' + hash }
-    setTimeout( x=>{ urlElem.value = url }, 100) })
+    setTimeout( x=> urlElem.value = url, 100) })
 
   this.on( 'disconnect', peer =>{
     console.log( 'peer disconnected:', peer)
@@ -54,9 +53,11 @@ function Dispatcher (opts){
       uploadbtn.style[ 'cursor'] = 'default'
       uploadbtn.style[ 'opacity'] = '.6'
       uploadbtn.text = 'reinitializing' }
-    else
+    else {
+      uploadbtn.style[ 'cursor'] = 'pointer'
+      uploadbtn.style[ 'opacity'] = '1'
       uploadbtn.text = 'send a file to ' + peers + ' peer'
-        + ((peers > 1)?'s':'') })
+        + ((peers > 1)?'s':'') } })
 
   this.on( 'connect', peer =>{
     console.log( 'peer connected:', peer)
@@ -64,10 +65,20 @@ function Dispatcher (opts){
     this.emit( 'acceptFiles', peer) })
 
   this.on( 'acceptFiles', peer =>{
-    let receive = new FileWriteStream()
-    peer.pipe( receive).on( 'file', file =>{
-      console.log( 'file received', file)
+    let writeStream = new FileWriteStream()
+    this.emit( 'endWriteStream', writeStream, peer)
+    peer.pipe( writeStream).on( 'file', file =>{
+      console.log( 'file received:', file)
       this.emit( 'attachFileURL', file) }) })
+
+  this.on( 'endWriteStream', (writeStream, peer) =>{
+    writeStream.on( 'header', meta =>{
+      console.log( 'incoming file size:', meta.size)
+      writeStream.on( 'progress', size =>{
+        console.log( 'already received:', size)
+        if (meta.size <= size) {
+          writeStream.end()
+          this.emit( 'acceptFiles', peer) } }) }) })
 
   this.on( 'attachFileURL', file =>{
     let fileLink = detect( 'URL').createObjectURL( file)
@@ -77,12 +88,12 @@ function Dispatcher (opts){
       downloadbtn.href = fileLink })
 
   this.on( 'fileAdded', input =>{
-    let file = new FileReadStream( input)
+    let file = new FileReadStream( input, {fields: ['name', 'size', 'type']})
     mesh.wrtc.peers.forEach( (peer, key) => this.emit( 'sendFile', file, peer)) })
 
   this.on( 'sendFile', (file, peer) =>{
     console.log( 'sending file to peer:', peer)
-    file.pipe( peer)
+    file.pipe( peer, {end: false})
     file.on( 'end', x=>
       console.log( 'sadly this also ends the peer stream :-(') ) })
 }
