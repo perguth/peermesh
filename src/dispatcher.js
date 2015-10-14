@@ -4,16 +4,12 @@ var FileReadStream = require( 'namedfilestream/read')
 var FileWriteStream = require( './mod-namedfilestream/write')
 var detect = require( 'feature/detect')
 
+module.exports = Dispatcher
 
 inherits( Dispatcher, EventEmitter)
-var singleton = (function (){
-  var instance
-  function init (opts){
-    return (instance = new Dispatcher( opts))}
-  return { getInstance: function (opts){
-    return instance || (instance = init( opts)) } } })()
-
 function Dispatcher (opts){
+  if (! (this instanceof Dispatcher)) return new Dispatcher( opts)
+  
   var urlElem = document.getElementById( 'url')
   var uploadbtn = document.getElementById( 'uploadLink')
   var downloadbtn = document.getElementById( 'downloadLink')
@@ -97,7 +93,4 @@ function Dispatcher (opts){
     console.log( 'sending file to peer:', peer)
     file.pipe( peer, {end: false})
     file.on( 'end', x=>
-      console.log( 'sadly this also ends the peer stream :-(') ) })
-}
-
-module.exports = singleton.getInstance
+      console.log( 'sadly this also ends the peer stream :-(') ) }) }
