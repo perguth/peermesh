@@ -92,7 +92,7 @@ function Dispatcher (opts){
     let fileLink = detect( 'URL').createObjectURL( file)
       let filesAread = document.getElementById('files')
       filesAread.innerHTML =
-        `<a id=downloadLink class='button browse red' style=cursor:pointer;width:100%;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;opacity:1; target=_blank href=${fileLink}>${file.name}</a>${filesAread.innerHTML}` })
+        `<a id=downloadLink class='button browse red' style=cursor:pointer;width:100%;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;opacity:1; target=_blank href=${fileLink} download="${file.name}">${file.name}</a>${filesAread.innerHTML}` })
 
   this.on( 'fileAdded', input =>{
     let file = new FileReadStream( input, {fields: ['name', 'size', 'type']})
