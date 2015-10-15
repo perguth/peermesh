@@ -68,27 +68,27 @@ function Dispatcher (opts){
 
   this.on( 'acceptFiles', peer =>{
     let writeStream = new FileWriteStream()
-    this.emit( 'endWriteStream', writeStream, peer)
-    var decrypt = crypto.createDecipher(algorithm, mesh.password)
+    let decrypt = crypto.createDecipher(algorithm, mesh.password)
+    this.emit( 'endWriteStream', writeStream, peer, decrypt)
     peer.pipe(  decrypt).pipe( writeStream).on( 'file', file =>{
       console.log( 'file received:', file)
       this.emit( 'attachFileURL', file) }) })
 
-  this.on( 'endWriteStream', (writeStream, peer) =>{
+  this.on( 'endWriteStream', (writeStream, peer, decrypt) =>{
     writeStream.on( 'header', meta =>{
       console.log( 'incoming file size:', meta.size)
       writeStream.on( 'progress', size =>{
         console.log( 'already received:', size)
         if (meta.size <= size) {
           writeStream.end()
+          decrypt.end()
           this.emit( 'acceptFiles', peer) } }) }) })
 
   this.on( 'attachFileURL', file =>{
     let fileLink = detect( 'URL').createObjectURL( file)
-      downloadbtn.innerHTML = file.name
-      downloadbtn.style[ 'cursor'] = 'pointer'
-      downloadbtn.style[ 'opacity'] = '1'
-      downloadbtn.href = fileLink })
+      let filesAread = document.getElementById('files')
+      filesAread.innerHTML =
+        `<a id=downloadLink class='button download red' style=cursor:pointer;width:100%;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;opacity:1; target=_blank href=${fileLink}>${file.name}</a>${filesAread.innerHTML}` })
 
   this.on( 'fileAdded', input =>{
     let file = new FileReadStream( input, {fields: ['name', 'size', 'type']})
