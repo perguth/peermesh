@@ -53,12 +53,16 @@ function Dispatcher (opts){
       uploadbtn.style[ 'cursor'] = 'default'
       uploadbtn.style[ 'opacity'] = '.6'
       uploadbtn.onclick = x=> null
+      uploadbtn.className =
+        uploadbtn.className.replace( 'process', 'receive' )
       uploadbtn.text = 'reinitializing' }
     else {
       uploadbtn.style[ 'cursor'] = 'pointer'
       uploadbtn.style[ 'opacity'] = '1'
       uploadbtn.onclick = x=> document.getElementById('send').click()
-      uploadbtn.text = 'send a file to ' + peers + ' peer'
+      uploadbtn.className =
+        uploadbtn.className.replace( 'receive', 'process')
+      uploadbtn.text = 'send to ' + peers + ' peer'
         + ((peers > 1)?'s':'') } })
 
   this.on( 'connect', peer =>{
@@ -88,7 +92,7 @@ function Dispatcher (opts){
     let fileLink = detect( 'URL').createObjectURL( file)
       let filesAread = document.getElementById('files')
       filesAread.innerHTML =
-        `<a id=downloadLink class='button download red' style=cursor:pointer;width:100%;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;opacity:1; target=_blank href=${fileLink}>${file.name}</a>${filesAread.innerHTML}` })
+        `<a id=downloadLink class='button browse red' style=cursor:pointer;width:100%;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;opacity:1; target=_blank href=${fileLink}>${file.name}</a>${filesAread.innerHTML}` })
 
   this.on( 'fileAdded', input =>{
     let file = new FileReadStream( input, {fields: ['name', 'size', 'type']})
