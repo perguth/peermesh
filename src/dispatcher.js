@@ -76,37 +76,35 @@ function Dispatcher (opts){
   this.on( 'acceptFiles', peer =>{
     let writeStream = new FileWriteStream()
     let decrypt = crypto.createDecipher(algorithm, mesh.password)
-    writeStream.on( 'header', meta =>{
-      this.emit( 'addFileButton', meta.name)
-      console.log( 'incoming file size:', meta.size)
-      writeStream.on( 'progress', progress =>{
-        this.emit( 'endWriteStream',
-          writeStream, peer, decrypt, meta.size, progress)
-        this.emit( 'updateProgress', meta.name, meta.size, progress) }) })
+    writeStream.on( 'header', meta =>
+      this.emit( 'handleDownload', meta, peer, writeStream, decrypt))
     peer.pipe(  decrypt).pipe( writeStream).on( 'file', file =>{
       console.log( 'file received:', file)
       this.emit( 'attachFileURL', file) }) })
 
+  this.on( 'handleDownload', (meta, peer, writeStream, decrypt) =>{
+    let shasum = crypto.createHash( 'sha1').update( meta.name)
+    let fileID = shasum.digest( 'hex')
+    this.emit( 'addFileButton', meta.name, fileID)
+    console.log( 'incoming file size:', meta.size)
+    writeStream.on( 'progress', progress =>{
+      this.emit( 'endWriteStream',
+        writeStream, peer, decrypt, meta.size, progress)
+      this.emit( 'updateProgress', meta.name, fileID, meta.size, progress) }) })
+
   this.on( 'endWriteStream', (writeStream, peer, decrypt, overall, progress) =>{
-    console.log( 'already received:', progress)
     if (overall <= progress) {
       writeStream.end()
       decrypt.end()
       this.emit( 'acceptFiles', peer) } })
 
-  this.on( 'addFileButton', fileName =>{
-    let shasum = crypto.createHash( 'sha1')
-    shasum.update( fileName)
-    let fileID = shasum.digest( 'hex')
+  this.on( 'addFileButton', (fileName, fileID) =>{
     console.log( 'fileid', fileID)
     let filesArea = document.getElementById('files')
     filesArea.innerHTML =
       `<a id=downloadLink class='button browse red ${fileID}' style=cursor:default;width:100%;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;opacity:1;background-image:url(green-big.png);background-repeat:no-repeat;background-position-x:-436px; target=_blank>${fileName}</a>${filesArea.innerHTML}` })
 
-  this.on( 'updateProgress', (name, overall, size) =>{
-    let shasum = crypto.createHash( 'sha1')
-    shasum.update( name)
-    let fileID = shasum.digest( 'hex')
+  this.on( 'updateProgress', (name, fileID, overall, size) =>{
     let fileButton = document.getElementsByClassName( fileID)[ 0]
     let margin = -1 * (436 - 436 * size / overall)
     fileButton.style.backgroundPositionX = margin + 'px' })
