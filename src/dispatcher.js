@@ -55,6 +55,8 @@ function Dispatcher (opts){
       uploadbtn.onclick = x=> null
       uploadbtn.className =
         uploadbtn.className.replace( 'process', 'receive' )
+      uploadbtn.className =
+        uploadbtn.className.replace( 'green', 'magenta')
       uploadbtn.text = 'reinitializing' }
     else {
       uploadbtn.style[ 'cursor'] = 'pointer'
@@ -62,6 +64,8 @@ function Dispatcher (opts){
       uploadbtn.onclick = x=> document.getElementById('send').click()
       uploadbtn.className =
         uploadbtn.className.replace( 'receive', 'process')
+      uploadbtn.className =
+        uploadbtn.className.replace( 'magenta', 'green')
       uploadbtn.text = 'send to ' + peers + ' peer'
         + ((peers > 1)?'s':'') } })
 
