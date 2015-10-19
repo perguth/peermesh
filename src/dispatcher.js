@@ -14,7 +14,6 @@ function Dispatcher (opts){
   
   var urlElem = document.getElementById( 'url')
   var uploadbtn = document.getElementById( 'uploadLink')
-  var downloadbtn = document.getElementById( 'downloadLink')
   var mesh
 
   this.on( 'noHash', x=>{
@@ -77,20 +76,21 @@ function Dispatcher (opts){
   this.on( 'acceptFiles', peer =>{
     let writeStream = new FileWriteStream()
     let decrypt = crypto.createDecipher(algorithm, mesh.password)
-    this.emit( 'endWriteStream', writeStream, peer, decrypt)
+    writeStream.on( 'header', meta =>{
+      console.log( 'incoming file size:', meta.size)
+      writeStream.on( 'progress', progress =>{
+        this.emit( 'endWriteStream',
+          writeStream, peer, decrypt, meta.size, progress) }) })
     peer.pipe(  decrypt).pipe( writeStream).on( 'file', file =>{
       console.log( 'file received:', file)
       this.emit( 'attachFileURL', file) }) })
 
-  this.on( 'endWriteStream', (writeStream, peer, decrypt) =>{
-    writeStream.on( 'header', meta =>{
-      console.log( 'incoming file size:', meta.size)
-      writeStream.on( 'progress', size =>{
-        console.log( 'already received:', size)
-        if (meta.size <= size) {
-          writeStream.end()
-          decrypt.end()
-          this.emit( 'acceptFiles', peer) } }) }) })
+  this.on( 'endWriteStream', (writeStream, peer, decrypt, overall, progress) =>{
+    console.log( 'already received:', progress)
+    if (overall <= progress) {
+      writeStream.end()
+      decrypt.end()
+      this.emit( 'acceptFiles', peer) } })
 
   this.on( 'attachFileURL', file =>{
     let fileLink = detect( 'URL').createObjectURL( file)
