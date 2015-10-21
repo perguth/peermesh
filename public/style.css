@@ -217,8 +217,6 @@ Button styles
 	background-position:-190px 0;
 }
 .button {
-	transition: background-color 0.2s,
-		width 0.3s ease-out;
 }
 .button.requesting-peer {
 	width: 436px;
@@ -226,7 +224,6 @@ Button styles
 	background-position: -436px 0;
 	background-image: url(green-big.png);
 	opacity: 0;
-	transition: opacity .25s ease-in-out;
 	cursor: default;
 }
 /*-------------------------

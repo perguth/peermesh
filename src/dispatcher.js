@@ -56,15 +56,21 @@ function Dispatcher (opts){
         uploadbtn.className.replace( 'process', 'receive' )
       uploadbtn.className =
         uploadbtn.className.replace( 'green', 'magenta')
+      uploadbtn.className =
+        uploadbtn.className.replace( 'red', 'magenta')
       uploadbtn.text = 'reinitializing' }
     else {
       uploadbtn.style[ 'cursor'] = 'pointer'
       uploadbtn.style[ 'opacity'] = '1'
       uploadbtn.onclick = x=> document.getElementById('send').click()
       uploadbtn.className =
-        uploadbtn.className.replace( 'receive', 'process')
+        uploadbtn.className.replace( 'receive', 'send')
+      uploadbtn.className =
+        uploadbtn.className.replace( 'process', 'send')
       uploadbtn.className =
         uploadbtn.className.replace( 'magenta', 'green')
+      uploadbtn.className =
+        uploadbtn.className.replace( 'red', 'green')
       uploadbtn.text = 'send to ' + peers + ' peer'
         + ((peers > 1)?'s':'') } })
 
@@ -125,7 +131,16 @@ function Dispatcher (opts){
 
   this.on( 'sendFile', (file, peer) =>{
     console.log( 'sending file to peer:', peer)
+    uploadbtn.style[ 'cursor'] = 'default'
+    uploadbtn.onclick = x=> null
+    uploadbtn.text = 'sending'
+    uploadbtn.className =
+      uploadbtn.className.replace( 'green', 'red')
+    uploadbtn.className =
+      uploadbtn.className.replace( 'send', 'process' )
     let encrypt = crypto.createCipher(algorithm, mesh.password)
     file.pipe( encrypt).pipe( peer, {end: false})
-    file.on( 'end', x=>
-      console.log( 'sadly this also ends the peer stream :-(') ) }) }
+    file.on( 'end', x=>{
+      this.emit( 'updateSendButton')
+      uploadbtn.onclick = x=> document.getElementById('send').click()
+      console.log( 'sadly this would also ends the peer stream :-(') }) }) }
