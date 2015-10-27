@@ -95,20 +95,28 @@ function Dispatcher (opts){
     console.log( 'incoming file size:', meta.size)
     writeStream.on( 'progress', progress =>{
       this.emit( 'endWriteStream',
-        writeStream, peer, decrypt, meta.size, progress)
+        writeStream, peer, decrypt, meta.size, progress, fileID)
       this.emit( 'updateProgress', meta.name, fileID, meta.size, progress) }) })
 
-  this.on( 'endWriteStream', (writeStream, peer, decrypt, overall, progress) =>{
+  this.on( 'endWriteStream',
+    (writeStream, peer, decrypt, overall, progress, fileID) =>{
     if (overall <= progress) {
       writeStream.end()
       decrypt.end()
+      let fileButton = document.getElementsByClassName( fileID)[ 0]
+      fileButton.className =
+        fileButton.className.replace( 'receive', 'browse')
       this.emit( 'acceptFiles', peer) } })
 
   this.on( 'addFileButton', (fileName, fileID) =>{
     console.log( 'fileid', fileID)
     let filesArea = document.getElementById('files')
     filesArea.innerHTML =
-      `<a id=downloadLink class='button browse red ${fileID}' style=cursor:default;width:100%;height:62px;line-height:62px;margin-bottom:13px;text-transform:none;opacity:1;background-image:url(green-big.png);background-repeat:no-repeat;background-position-x:-436px; target=_blank>${fileName}</a>${filesArea.innerHTML}` })
+      `<a id=downloadLink class='button receive red ${fileID}' style='cursor:default;
+        width:100%;height:62px;line-height:62px;margin-bottom:13px;
+        text-transform:none;opacity:1;background-image:url(green-big.png);
+        background-repeat:no-repeat;background-position-x:-436px;'
+        target=_blank>${fileName}</a>${filesArea.innerHTML}` })
 
   this.on( 'updateProgress', (name, fileID, overall, size) =>{
     let fileButton = document.getElementsByClassName( fileID)[ 0]
