@@ -1,6 +1,6 @@
 {
   "name": "peermesh",
-  "version": "1.0.0",
+  "version": "2.1.2",
   "description": "Send files peer-to-peer over a mesh network built with WebRTC.",
   "main": "index.js",
   "scripts": {
