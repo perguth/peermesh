@@ -8,8 +8,12 @@
 - [x] Swarms can be joined by opening the mesh URL.
 - [x] Swarm form fully meshed networks (n:n) using [`webrtc-swarm`](https://github.com/mafintosh/webrtc-swarm).
 - [x] WebRTC signaling data is exchanged via [`signalhub`](https://github.com/mafintosh/signalhub).
+- [x] Swarm URLs can be bookmarked and reused. `trust on first use: encryption keys`
+- [ ] You see when the source code changes because of [`hyperboot`](https://github.com/substack/hyperboot). `trust on first use: source code`
 
-Files will not be propagated among peers. The peers that initates a transfer will send the file to all connected peers.
+Files will \*not\* be propagated among peers. The peers that initates a transfer will send the file to every connected peer individually.
+
+Combining trust on first use both for encryption keys \*and\* source code will help you [defeat Sauron](http://holgerkrekel.net/2013/10/26/defating-sauron-with-the-trust-on-first-use-principle/)!
 
 [![peermesh](https://cdn.pbrd.co/images/1nDKNtbn.png)](https://pguth.github.io/peermesh/)
 
