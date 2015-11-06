@@ -17,6 +17,21 @@ Combining trust on first use both for encryption keys \*and\* source code will h
 
 [![peermesh](https://cdn.pbrd.co/images/1nDKNtbn.png)](https://pguth.github.io/peermesh/)
 
+## Installation
+
+```sh
+git clone https://github.com/pguth/peermesh.git
+cd peermesh
+
+# You need a signaling server running:
+npm install -g signalhub
+signalhub listen -p 7000
+
+# Now serve peermesh:
+npm run build # and then open `public/index.html` in your browser or
+npm start # to start the development server on `http://localhost:9966`
+```
+
 ## Related
 
 - [`peertransfer`](https://github.com/pguth/peertransfer)
