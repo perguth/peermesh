@@ -24,4 +24,5 @@ Combining trust on first use both for encryption keys \*and\* source code will h
 
 ## Credits
 
-- [Encrypt and decrypt content with Nodejs](http://lollyrock.com/articles/nodejs-encryption/)
+- [Encrypt and decrypt content with Nodejs](http://lollyrock.com/articles/nodejs-encryption/) `crypto`
+- [JavaScript File Encrypter](http://tutorialzine.com/2013/11/javascript-file-encrypter/) `design`
