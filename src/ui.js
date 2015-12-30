@@ -13,12 +13,9 @@ function Ui (opts) {
     uploadbtn.style['cursor'] = 'default'
     uploadbtn.style['opacity'] = '.6'
     uploadbtn.onclick = x => null
-    uploadbtn.className =
-    uploadbtn.className.replace('process', 'receive')
-    uploadbtn.className =
-    uploadbtn.className.replace('green', 'magenta')
-    uploadbtn.className =
-    uploadbtn.className.replace('red', 'magenta')
+    uploadbtn.className = uploadbtn.className.replace('process', 'receive')
+    uploadbtn.className = uploadbtn.className.replace('green', 'magenta')
+    uploadbtn.className = uploadbtn.className.replace('red', 'magenta')
     uploadbtn.text = 'reinitializing'
   })
 
@@ -26,14 +23,10 @@ function Ui (opts) {
     uploadbtn.style['cursor'] = 'pointer'
     uploadbtn.style['opacity'] = '1'
     uploadbtn.onclick = x => document.getElementById('send').click()
-    uploadbtn.className =
-      uploadbtn.className.replace('receive', 'send')
-    uploadbtn.className =
-      uploadbtn.className.replace('process', 'send')
-    uploadbtn.className =
-      uploadbtn.className.replace('magenta', 'green')
-    uploadbtn.className =
-      uploadbtn.className.replace('red', 'green')
+    uploadbtn.className = uploadbtn.className.replace('receive', 'send')
+    uploadbtn.className = uploadbtn.className.replace('process', 'send')
+    uploadbtn.className = uploadbtn.className.replace('magenta', 'green')
+    uploadbtn.className = uploadbtn.className.replace('red', 'green')
     uploadbtn.text = 'send to ' + peers + ' peer' + ((peers > 1) ? 's' : '')
   })
 
@@ -69,9 +62,7 @@ function Ui (opts) {
     uploadbtn.style['cursor'] = 'default'
     uploadbtn.onclick = x => null
     uploadbtn.text = 'sending'
-    uploadbtn.className =
-    uploadbtn.className.replace('green', 'red')
-    uploadbtn.className =
-    uploadbtn.className.replace('send', 'process')
+    uploadbtn.className = uploadbtn.className.replace('green', 'red')
+    uploadbtn.className = uploadbtn.className.replace('send', 'process')
   })
 }
