@@ -7,7 +7,6 @@ inherits(Ui, EventEmitter)
 function Ui (opts) {
   if (!(this instanceof Ui)) return new Ui(opts)
 
-  var urlElem = document.getElementById('url')
   var uploadbtn = document.getElementById('uploadLink')
 
   this.on('noMorePeers', peers => {
@@ -15,7 +14,7 @@ function Ui (opts) {
     uploadbtn.style['opacity'] = '.6'
     uploadbtn.onclick = x => null
     uploadbtn.className =
-    uploadbtn.className.replace('process', 'receive' )
+    uploadbtn.className.replace('process', 'receive')
     uploadbtn.className =
     uploadbtn.className.replace('green', 'magenta')
     uploadbtn.className =
