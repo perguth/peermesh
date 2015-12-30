@@ -3,7 +3,7 @@ var crypto = require('crypto')
 var detect = require('feature/detect')
 var EventEmitter = require('events').EventEmitter
 var FileReadStream = require('namedfilestream/read')
-var FileWriteStream = require('./mod-namedfilestream/write')
+var FileWriteStream = require('namedfilestream/write')
 var inherits = require('inherits')
 var ui = require('./ui')()
 
