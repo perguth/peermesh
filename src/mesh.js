@@ -7,13 +7,16 @@ var inherits = require('inherits')
 module.exports = Mesh
 
 inherits(Mesh, EventEmitter)
-function Mesh (opts){
-  if (! (this instanceof Mesh)) return new Mesh(opts)
-  if (! opts) opts = { namespace: null }
-  if (! this.namespace) {
+function Mesh (opts) {
+  if (!(this instanceof Mesh)) return new Mesh(opts)
+  if (!opts) opts = { namespace: null }
+  if (!this.namespace) {
     this.namespace = opts.namespace || cuid.slug()
     this.password = opts.password || cuid()
-    this.wrtc = webrtcSwarm(signalhub(this.namespace, 
+    this.wrtc = webrtcSwarm(signalhub(this.namespace,
       ['http://localhost:7000']), {})
-    ;['peer', 'connect', 'disconnect'].forEach(event =>{
-      this.wrtc.on(event, x => this.emit(event, x)) }) } }
+    ;['peer', 'connect', 'disconnect'].forEach(event => {
+      this.wrtc.on(event, x => this.emit(event, x))
+    })
+  }
+}
