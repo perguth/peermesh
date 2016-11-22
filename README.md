@@ -22,6 +22,7 @@ Combining trust on first use both for encryption keys \*and\* source code will h
 ```sh
 git clone https://github.com/pguth/peermesh.git
 cd peermesh
+npm install
 
 # You need a signaling server running:
 npm install -g signalhub
