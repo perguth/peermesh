@@ -18,7 +18,6 @@
   "author": "Per Guth <mail@perguth.de> (http://perguth.de/)",
   "license": "AGPLv3",
   "dependencies": {
-    "crypto": "0.0.3",
     "cuid": "^1.3.8",
     "events": "^1.1.0",
     "feature": "^1.0.0",
