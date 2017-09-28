@@ -28769,7 +28769,7 @@ function Mesh(opts) {
   if (!this.namespace) {
     this.namespace = opts.namespace || cuid.slug();
     this.password = opts.password || cuid();
-    this.wrtc = webrtcSwarm(signalhub(this.namespace, ['http://localhost:7000']), {});['peer', 'connect', 'disconnect'].forEach(event => {
+    this.wrtc = webrtcSwarm(signalhub(this.namespace, ['https://signalhub.perguth.de:65300/']), {});['peer', 'connect', 'disconnect'].forEach(event => {
       this.wrtc.on(event, x => this.emit(event, x));
     });
   }
