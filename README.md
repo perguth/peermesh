@@ -42,5 +42,3 @@ npm start # to start the development server on `http://localhost:9966`
 
 - [Encrypt and decrypt content with Nodejs](http://lollyrock.com/articles/nodejs-encryption/) `crypto`
 - [JavaScript File Encrypter](http://tutorialzine.com/2013/11/javascript-file-encrypter/) `design`
-
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
