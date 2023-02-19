@@ -15,8 +15,6 @@ Files will \*not\* be propagated among peers. The peers that initates a transfer
 
 Combining trust on first use both for encryption keys \*and\* source code will help you [defeat Sauron](http://holgerkrekel.net/2013/10/26/defating-sauron-with-the-trust-on-first-use-principle/)!
 
-[![peermesh](https://cdn.pbrd.co/images/1nDKNtbn.png)](https://pguth.github.io/peermesh/)
-
 ## Installation
 
 ```sh
